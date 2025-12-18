@@ -145,14 +145,9 @@ async def async_setup_entry(hass, config_entry):
         _LOGGER.exception(error)
         return False
     _LOGGER.info('data : %s', hass.data[DOMAIN_DATA])
-    # Add binary_sensor
+    # Add sensor and binary_sensor
     hass.async_add_job(
-        hass.config_entries.async_forward_entry_setup(config_entry, "binary_sensor")
-    )
-
-    # Add sensor
-    hass.async_add_job(
-        hass.config_entries.async_forward_entry_setup(config_entry, "sensor")
+        hass.config_entries.async_forward_entry_setups(config_entry, ["binary_sensor","sensor"])
     )
 
     @callback
