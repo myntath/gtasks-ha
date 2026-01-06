@@ -146,9 +146,7 @@ async def async_setup_entry(hass, config_entry):
         return False
     _LOGGER.info('data : %s', hass.data[DOMAIN_DATA])
     # Add sensor and binary_sensor
-    hass.async_add_job(
-        hass.config_entries.async_forward_entry_setups(config_entry, ["binary_sensor","sensor"])
-    )
+    await hass.config_entries.async_forward_entry_setups(config_entry, ["binary_sensor","sensor"])
 
     @callback
     async def new_task(call):
